@@ -2,6 +2,7 @@ package lyh.seaweather;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -82,6 +83,12 @@ public class ChooseAreaFragment extends Fragment {
                 } else if (mcurrentLevel == LEVEL_CITY) {
                     mselectedCity = mcityList.get(position);//选中的城市
                     queryCounties();
+                }else if (mcurrentLevel==LEVEL_COUNTY){
+                    String weatherId=mcountyList.get(position).getWeatherId();
+                    Intent intent=new Intent(getActivity(),WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
                 }
             }
             });

@@ -2,6 +2,8 @@ package lyh.seaweather.util;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +11,7 @@ import org.json.JSONObject;
 import lyh.seaweather.db.City;
 import lyh.seaweather.db.County;
 import lyh.seaweather.db.Province;
+import lyh.seaweather.gson.Weather;
 
 /**
  * Created by liuwei on 17-7-23.
@@ -73,5 +76,17 @@ public class Utility {
             }
         }
         return false;
+    }
+    //解析天气的数据
+    public static Weather handleWeatherResponse(String reponse){
+        try{
+            JSONObject jsonObject=new JSONObject(reponse);
+            JSONArray jsonArray=jsonObject.getJSONArray("HeWeather");
+            String weatherContent=jsonArray.getJSONObject(0).toString();
+            return new Gson().fromJson(weatherContent,Weather.class);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
