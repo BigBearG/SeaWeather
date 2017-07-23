@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="seaweather"/>
+    <version value="1"/>
+    <list>
+        <mapping class='lyh.seaweather.db.Province'/>
+        <mapping class='lyh.seaweather.db.City'/>
+        <mapping class='lyh.seaweather.db.County'/>
+    </list>
+</litepal>
