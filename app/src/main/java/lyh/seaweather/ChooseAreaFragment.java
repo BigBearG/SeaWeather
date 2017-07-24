@@ -85,10 +85,17 @@ public class ChooseAreaFragment extends Fragment {
                     queryCounties();
                 }else if (mcurrentLevel==LEVEL_COUNTY){
                     String weatherId=mcountyList.get(position).getWeatherId();
-                    Intent intent=new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    if (getActivity() instanceof MainActivity){
+                        Intent intent=new Intent(getActivity(),WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if (getActivity() instanceof WeatherActivity){
+                        WeatherActivity weatherActivity= (WeatherActivity) getActivity();
+                        weatherActivity.mdrawerLayout.closeDrawers();
+                        weatherActivity.mswipeRefresh.setRefreshing(true);
+                        weatherActivity.requestWeather(weatherId);
+                    }
                 }
             }
             });
